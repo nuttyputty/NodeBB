@@ -8,7 +8,7 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/node:12.14.1
-      - image: circleci/mongo:4.0
+      - image: circleci/mongo:latest
         environment:
           url: http://127.0.0.1:4567
           secret: abcdef
