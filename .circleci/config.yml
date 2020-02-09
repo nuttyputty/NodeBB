@@ -81,9 +81,9 @@ jobs:
             ./nodebb setup
 
 
-      - save_cache:
-          paths:
-            - node_modules
+#      - save_cache:
+#          paths:
+#            - node_modules
 #          key: v1-dependencies-{{ checksum "package.json" }}
 
 #      - run:
