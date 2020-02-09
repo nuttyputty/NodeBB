@@ -81,20 +81,10 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      - deploy:
+      - run:
           name: Deploy
           command: |
             ./nodebb setup
             ./nodebb start
 
-workflows:
-  version: 2
-  workflow:
-    jobs:
-      - build_deploy:
-          filters:
-            branches:
-              only:
-                - master
-                - staging
-                - production
+
