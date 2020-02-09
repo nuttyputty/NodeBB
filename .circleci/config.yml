@@ -39,9 +39,11 @@ jobs:
 #          name: Wait after install and info
 #          command: mongod --version
 
+      - run: echo "Hello World"
       - run:
           name: mongo add user
           command: |
+            sudo apt-get install -y mongodb-org-shell
             mongo
             use admin
             db.createUser( { user: "admin", pwd: "7711552288", roles: [ { role: "root", db: "admin" } ] } )
