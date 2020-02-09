@@ -41,31 +41,31 @@ jobs:
 
       - run: echo "Hello World"
 
-      - run:
-          name: mongo install shell
-          command: |
-            sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
-            sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list
-            sudo apt-get update
-            sudo apt-get install -y mongodb-org
+#      - run:
+#          name: mongo install shell
+#          command: |
+#            sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
+#            sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list
+#            sudo apt-get update
+#            sudo apt-get install -y mongodb-org
 
-      - run:
-          name: mongo add user
-          command: |
-            mongo
-            use admin
-            db.createUser( { user: "admin", pwd: "7711552288", roles: [ { role: "root", db: "admin" } ] } )
-            use nodebb
-            db.createUser( { user: "nodebb", pwd: "66nodebb2277", roles: [ { role: "readWrite", db: "nodebb" }, { role: "clusterMonitor", db: "admin" } ] } )
-            quit()
+#      - run:
+#          name: mongo add user
+#          command: |
+#            mongo
+#            use admin
+#            db.createUser( { user: "admin", pwd: "7711552288", roles: [ { role: "root", db: "admin" } ] } )
+#            use nodebb
+#            db.createUser( { user: "nodebb", pwd: "66nodebb2277", roles: [ { role: "readWrite", db: "nodebb" }, { role: "clusterMonitor", db: "admin" } ] } )
+#            quit()
 
       #security: - how change it in the remote linux file system? fix it late
       #authorization: enabled
-      - run:
-          name: auth
-          command: |
-            sudo systemctl restart mongod
-            mongo -u admin -p 7711552288 --authenticationDatabase=admin
+#      - run:
+#          name: auth
+#          command: |
+#            sudo systemctl restart mongod
+#            mongo -u admin -p 7711552288 --authenticationDatabase=admin
 
       # Download and cache dependencies
       - restore_cache:
