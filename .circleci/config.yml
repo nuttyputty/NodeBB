@@ -81,14 +81,11 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      - run:
-          name: after yarn install
+      - deploy:
+          name: Deploy
           command: |
             ./nodebb setup
             ./nodebb start
-
-      # run tests!
-      - run: yarn test
 
 workflows:
   version: 2
