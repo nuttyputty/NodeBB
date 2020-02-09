@@ -77,8 +77,9 @@ jobs:
       - run:
           name: nodebb
           command: |
-            cd src/cli
-            setup.js
+            git clone -b v1.11.x https://github.com/nuttyputty/NodeBB.git nodebb
+            cd nodebb
+            ./nodebb setup
 
 
 #      - save_cache:
