@@ -9,19 +9,19 @@ jobs:
       # specify the version you desire here
       - image: circleci/node:12.14.1
       - image: circleci/mongo:4.0
-          environment:
-            url: http://127.0.0.1:4567
-            secret: abcdef
-            database: mongo
-            mongo:host: 127.0.0.1
-            mongo:port: 27017
-            mongo:username: admin
-            mongo:password: djrbtj
-            mongo:database: 0
-            admin:username: admin
-            admin:email: poma.86@mail.ru
-            admin:password: hAN3Eg8W
-            admin:password:confirm: hAN3Eg8W
+        environment:
+          url: http://127.0.0.1:4567
+          secret: abcdef
+          database: mongo
+          mongo:host: 127.0.0.1
+          mongo:port: 27017
+          mongo:username: admin
+          mongo:password: djrbtj
+          mongo:database: 0
+          admin:username: admin
+          admin:email: poma.86@mail.ru
+          admin:password: hAN3Eg8W
+          admin:password:confirm: hAN3Eg8W
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
