@@ -1,0 +1,88 @@
+# JavaScript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:10.16.3
+      - image: circleci/mongo:4.0
+        environment:
+          url: http://127.0.0.1:4567
+          secret: abcdef
+          database: mongo
+          mongo:host: 127.0.0.1
+          mongo:port: 27017
+          mongo:username: admin
+          mongo:password: djrbtj
+          mongo:database: 0
+          admin:username: admin
+          admin:email: poma.86@mail.ru
+          admin:password: hAN3Eg8W
+          admin:password:confirm: hAN3Eg8W
+
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/mongo:3.4.4
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - run:
+          name: Install mongoDB
+          command: |
+            sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
+            echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list
+            sudo apt-get update
+            sudo apt-get install -y mongodb-org
+
+      - run:
+          name: Wait after install and info
+          command: |
+            sleep 5
+            mongod --version
+
+      - run:
+          name: mongo add user
+          command: |
+            mongo
+            use admin
+            db.createUser( { user: "admin", pwd: "7711552288", roles: [ { role: "root", db: "admin" } ] } )
+            use nodebb
+            db.createUser( { user: "nodebb", pwd: "66nodebb2277", roles: [ { role: "readWrite", db: "nodebb" }, { role: "clusterMonitor", db: "admin" } ] } )
+            quit()
+
+      #security: - how change it in the remote linux file system? fix it late
+      #authorization: enabled
+      - run:
+          name: auth
+          command: |
+            sudo systemctl restart mongod
+            mongo -u admin -p 7711552288 --authenticationDatabase=admin
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run: yarn install
+      - run:
+          name: after yarn install
+          command: |
+            ./nodebb setup
+            ./nodebb start
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      # run tests!
+      - run: yarn test
