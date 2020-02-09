@@ -32,6 +32,8 @@ jobs:
 
     steps:
       - checkout
+      - attach_workspace:
+          at: ~/artifacts
 
       - run:
           name: Install mongoDB
@@ -73,16 +75,29 @@ jobs:
             - v1-dependencies-
 
       - run: yarn install
-      - run:
-          name: after yarn install
-          command: |
-            ./nodebb setup
-            ./nodebb start
 
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
+      - run:
+          name: after yarn install
+          command: |
+            ./nodebb setup
+            ./nodebb start
+
       # run tests!
       - run: yarn test
+
+workflows:
+  version: 2
+  workflow:
+    jobs:
+      - build_deploy:
+          filters:
+            branches:
+              only:
+                - master
+                - staging
+                - production
