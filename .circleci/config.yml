@@ -78,7 +78,7 @@ jobs:
           name: nodebb
           command: |
             cd src/cli
-            setup
+            setup.js
 
 
 #      - save_cache:
