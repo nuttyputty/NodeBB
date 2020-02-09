@@ -16,7 +16,8 @@ const connection = require('./mongo/connection');
 const mongoModule = module.exports;
 
 function isUriNotSpecified() {
-	return !prompt.history('mongo:uri').value;
+	// return !prompt.history('mongo:uri').value;
+	return !prompt.history('mongo:uri');
 }
 
 mongoModule.questions = [

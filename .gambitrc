@@ -1,0 +1,16 @@
+site=http://localhost:4567
+
+[google]
+  clientId=548098471238-88majtl9vikjce12kr0ph23ln79hth73.apps.googleusercontent.com
+  clientSecret=IQv8tylk3jJ3MPIaOEgqblOJ
+
+[facebook]
+  clientId=1648252268785964
+  clientSecret=e2f4c0ab54bea76694499b213c5d694a
+
+[api]
+  secret=1c06cefc-3e69-4e36-8512-b27d1bbb6777
+  url=https://dev-api.gambit.com
+
+[ws]
+  url=wss://dev-api.gambit.com
