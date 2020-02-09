@@ -8,7 +8,7 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/node:12.14.1
-      - image: circleci/mongo:4.0
+      - image: circleci/mongo:latest
         environment:
           url: http://127.0.0.1:4567
           secret: abcdef
@@ -47,11 +47,12 @@ jobs:
             sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
             sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list
             sudo apt-get update
-            sudo apt-get install -y mongodb-org
+    #sudo apt-get install -y mongodb-org
 
       - run:
           name: mongo add user
           command: |
+            sudo systemctl start mongod
             mongo
             use admin
             db.createUser( { user: "admin", pwd: "7711552288", roles: [ { role: "root", db: "admin" } ] } )
