@@ -77,6 +77,8 @@ jobs:
       - run:
           name: nodebb
           command: |
+            cp ./install/package.json ./
+            yarn install
             cd ./src/cli
             node index
 
