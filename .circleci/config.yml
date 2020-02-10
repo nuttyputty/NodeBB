@@ -81,6 +81,7 @@ jobs:
             yarn install
             cd ./src/cli/
             node setup
+            node start
 
 
 #      - save_cache:
