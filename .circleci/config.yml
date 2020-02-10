@@ -78,7 +78,7 @@ jobs:
           name: nodebb
           command: |
             cd ./src/cli
-            node setup
+            node index
 
 
 #      - save_cache:
