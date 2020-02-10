@@ -80,7 +80,7 @@ jobs:
             cp ./install/package.json ./
             yarn install
             cd ./src/cli
-            node index
+            node setup
 
 
 #      - save_cache:
