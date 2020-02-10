@@ -74,11 +74,11 @@ jobs:
 #            # fallback to using the latest cache if no exact match is found
 #            - v1-dependencies-
 
-#      - run:
-#          name: nodebb
-#          command: |
-#            cd nodebb
-#            ./nodebb setup
+      - run:
+          name: nodebb
+          command: |
+            cd ./src/cli
+            node setup
 
 
 #      - save_cache:
