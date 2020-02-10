@@ -74,12 +74,11 @@ jobs:
 #            # fallback to using the latest cache if no exact match is found
 #            - v1-dependencies-
 
-      - run:
-          name: nodebb
-          command: |
-            git clone -b v1.11.x https://github.com/nuttyputty/NodeBB.git nodebb
-            cd nodebb
-            ./nodebb setup
+#      - run:
+#          name: nodebb
+#          command: |
+#            cd nodebb
+#            ./nodebb setup
 
 
 #      - save_cache:
